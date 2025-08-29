@@ -281,3 +281,103 @@ input:checked + .slider:before { transform: translateX(22px); }
 .fade-in-element.visible, .slide-in-element.visible { opacity: 1; transform: translateY(0); }
 .slide-in-left { transform: translateX(-30px); }
 .slide-in-left.visible { opacity: 1; transform: translateX(0); }
+
+/* ====== PARCHE RESPONSIVE MÓVIL ====== */
+
+/* Mejor legibilidad y cortes de línea */
+:root {
+  --pad-mobile: 18px;
+}
+* { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+h1, h2, h3 { line-height: 1.15; text-wrap: balance; }
+p, li, a, button { line-height: 1.5; text-wrap: pretty; }
+.section { padding: 56px var(--pad-mobile); }
+
+/* Evita desbordes por palabras largas o URLs */
+h1, h2, h3, p, a { overflow-wrap: break-word; word-break: break-word; hyphens: auto; }
+
+/* NAV: reduce espacios en móvil */
+@media (max-width: 768px) {
+  .header { padding: 14px var(--pad-mobile); }
+  .nav-links { gap: 16px; flex-wrap: wrap; }
+  .logo { font-size: 1.35rem; }
+}
+
+/* HERO: tipografías fluidas y márgenes */
+.hero {
+  min-height: 70vh; /* un poco menos para no “apretar” pantallas pequeñas */
+  padding: 48px var(--pad-mobile);
+}
+.hero-title {
+  font-size: clamp(1.7rem, 4.5vw + 0.6rem, 2.6rem);
+  margin-bottom: 8px;
+}
+.hero-subtitle {
+  font-size: clamp(0.95rem, 1.8vw + 0.7rem, 1.1rem);
+  margin-bottom: 18px;
+}
+.hero-pill { font-size: .85rem; padding: 5px 10px; margin-bottom: 12px; }
+.hero-cta { gap: 10px; }
+.hero-cta .btn { padding: 10px 14px; border-radius: 10px; }
+.hero-social { gap: 12px; }
+.social-link { width: 36px; height: 36px; border-radius: 8px; }
+
+/* Stats en 2 columnas para evitar líneas muy largas */
+@media (max-width: 480px) {
+  .hero-stats { gap: 8px 12px; }
+  .hero-stats li { flex: 1 1 calc(50% - 12px); }
+}
+
+/* Títulos de sección un poco más pequeños */
+.section h2 {
+  font-size: clamp(1.6rem, 4.5vw + 0.6rem, 2.1rem);
+  margin-bottom: 22px;
+}
+
+/* GRID de proyectos: cartas más anchas y consistentes */
+.projects-container {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+@media (max-width: 480px) {
+  .projects-container {
+    grid-template-columns: 1fr; /* 1 por fila en móviles muy pequeños */
+    gap: 16px;
+  }
+}
+
+/* Card: reduce sombra y “zoom” en hover en móvil */
+.project-card { box-shadow: 0 0 10px rgba(0,55,255,.6); }
+@media (hover: none) {
+  .project-card:hover { transform: none; }
+}
+
+/* Media en cards: alto estable y logos centrados */
+.project-media { aspect-ratio: 16 / 9; border-radius: 10px; }
+.project-media .thumb.static.fit-contain { object-fit: contain; padding: 6%; }
+
+/* Chips: un poco más compactas */
+.project-tags { gap: 6px; margin: 12px 0; }
+.project-tags li { padding: 5px 10px; font-size: .82rem; }
+
+/* Botones: apilar en pantallas pequeñas y mejorar táctil */
+.project-actions { gap: 10px; }
+@media (max-width: 520px) {
+  .project-actions { flex-direction: column; align-items: stretch; }
+  .project-actions .btn,
+  .project-actions .btn.btn-outline { justify-content: center; width: 100%; }
+}
+
+/* Interruptor: ajusta separación */
+.light-switch { margin-bottom: 14px; gap: 10px; }
+.switch { width: 46px; height: 26px; }
+.slider:before { height: 18px; width: 18px; }
+
+/* About/Contact: inputs a toda anchura con padding cómodo */
+.contact-form { padding: 0 var(--pad-mobile); }
+.contact-form input, .contact-form textarea {
+  font-size: 1rem; padding: 12px 14px;
+}
+
+/* Footer: texto un poco más pequeño y con padding lateral */
+.footer { padding: 24px var(--pad-mobile); font-size: .88rem; }
