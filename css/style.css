@@ -381,3 +381,27 @@ h1, h2, h3, p, a { overflow-wrap: break-word; word-break: break-word; hyphens: a
 
 /* Footer: texto un poco más pequeño y con padding lateral */
 .footer { padding: 24px var(--pad-mobile); font-size: .88rem; }
+
+/* --- Fix: que el hero no se quede corto en móvil --- */
+.hero { position: relative; } /* para el fade */
+@media (max-width: 600px) {
+  .hero {
+    min-height: unset;                   /* deja que crezca lo que necesite */
+    padding: 64px 18px 96px;             /* más aire abajo */
+  }
+  .hero-stats { max-width: 680px; margin-inline: auto; }
+}
+
+/* Suave transición al fondo de la página para que nada “salga” del color */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 48px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(18,18,18,0.85) 100%
+  );
+}
