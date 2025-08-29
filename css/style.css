@@ -405,3 +405,35 @@ h1, h2, h3, p, a { overflow-wrap: break-word; word-break: break-word; hyphens: a
     rgba(18,18,18,0.85) 100%
   );
 }
+
+/* Social icons visibles y consistentes */
+.hero-social {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;              /* currentColor del SVG */
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 10px;
+  transition: transform .2s ease, border-color .2s ease, background-color .2s ease;
+  background: rgba(255,255,255,0.06);
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 119, 255, .6);
+  background: rgba(255,255,255,0.12);
+}
+
+.social-link svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
