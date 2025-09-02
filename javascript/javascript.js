@@ -80,17 +80,17 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: "App SPA con catálogo, búsqueda TMDB, detalle y login simulado.",
       tech: ["HTML", "CSS", "JavaScript", "TMDB API"],
       logo: "../media/imagenes/logostreamio.png",
-      gif: "../assets/streamio/streamio-preview.gif",
+      gif: "../media/imagenes/gifStreamio.gif",
       demo: "https://tu-demo-streamio.com",
       code: "https://github.com/tuusuario/streamio",
       logoFit: "contain" // <<— para ver el logo completo sin recorte
     },
     {
-      title: "Nombre del Proyecto 2",
-      desc: "Descripción breve del proyecto 2. Qué hace y su highlight técnico.",
+      title: "El Restaurante",
+      desc: "App El Restaurante con catalogo y sistema de reservas.",
       tech: ["HTML", "CSS", "JavaScript"],
       logo: "../media/imagenes/logo1.png",
-      gif: "../assets/proyecto2/proyecto2-preview.gif",
+      gif: "../media/imagenes/gifRestaurante.gif",
       demo: "https://tu-demo-proyecto2.com",
       code: "https://github.com/tuusuario/proyecto2",
       logoFit: "cover" // <<— si tu 'logo' es más bien una captura/screenshot
