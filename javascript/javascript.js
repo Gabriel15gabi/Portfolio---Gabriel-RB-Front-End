@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
       tech: ["HTML", "CSS", "JavaScript"],
       logo: "../media/imagenes/logo1.png",
       gif: "../media/imagenes/gifRestaurante.gif",
-      demo: "https://tu-demo-proyecto2.com",
-      code: "https://github.com/tuusuario/proyecto2",
+      demo: "https://gabriel15gabi.github.io/El-Restaurante/",
+      code: "https://github.com/Gabriel15gabi/El-Restaurante",
       logoFit: "cover" // <<— si tu 'logo' es más bien una captura/screenshot
     }
   ];
