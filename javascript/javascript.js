@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
       tech: ["HTML", "CSS", "JavaScript", "TMDB API"],
       logo: "../media/imagenes/logostreamio.png",
       gif: "../media/imagenes/gifStreamio.gif",
-      demo: "https://tu-demo-streamio.com",
-      code: "https://github.com/tuusuario/streamio",
+      demo: "https://gabriel15gabi.github.io/Streamio/",
+      code: "https://github.com/Gabriel15gabi/Streamio",
       logoFit: "contain" // <<— para ver el logo completo sin recorte
     },
     {
