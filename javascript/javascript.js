@@ -47,22 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightSwitch = document.getElementById("project-light");
   const projectsContainer = document.querySelector(".projects-container");
 
-  // Empieza apagado
-  projectsContainer.classList.add("off");
+  // Empieza apagado (solo si existe el contenedor)
+  if (projectsContainer) projectsContainer.classList.add("off");
 
-  lightSwitch.addEventListener("change", () => {
-    if (lightSwitch.checked) {
-      projectsContainer.classList.remove("off");
-    } else {
-      projectsContainer.classList.add("off");
-    }
-  });
+  if (lightSwitch) {
+    lightSwitch.addEventListener("change", () => {
+      if (!projectsContainer) return;
+      if (lightSwitch.checked) {
+        projectsContainer.classList.remove("off");
+      } else {
+        projectsContainer.classList.add("off");
+      }
+    });
+  }
 
   /* === ANIMACIONES AL HACER SCROLL === */
   const observerOptions = { threshold: 0.1 };
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting) {
+      if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
@@ -83,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gif: "../media/imagenes/gifStreamio.gif",
       demo: "https://gabriel15gabi.github.io/Streamio/",
       code: "https://github.com/Gabriel15gabi/Streamio",
-      logoFit: "contain" // <<— para ver el logo completo sin recorte
+      logoFit: "contain" // para ver el logo completo sin recorte
     },
     {
       title: "El Restaurante",
@@ -93,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gif: "../media/imagenes/gifRestaurante.gif",
       demo: "https://gabriel15gabi.github.io/El-Restaurante/",
       code: "https://github.com/Gabriel15gabi/El-Restaurante",
-      logoFit: "cover" // <<— si tu 'logo' es más bien una captura/screenshot
+      logoFit: "cover" // si tu 'logo' es más bien una captura/screenshot
     }
   ];
 
@@ -145,16 +148,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderProjects(list) {
+    if (!container) return;
     container.innerHTML = list.map(projectCardTemplate).join("");
   }
 
   renderProjects(projectsData);
 
-  // 4) Soporte touch: tap para alternar (añade/quita show-gif a la card)
-  container.addEventListener("touchstart", (e) => {
-    const card = e.target.closest(".project-card");
-    if (!card) return;
-    e.preventDefault(); // evita scroll en primer tap sobre la card
-    card.classList.toggle("show-gif");
-  }, { passive: false });
+  // --- Touch/pointer: alterna el GIF solo si tocas la media y nunca bloquea enlaces ---
+  (function () {
+    var containerEl = document.querySelector(".projects-container");
+    if (!containerEl) return;
+
+    // closest seguro (usa nativo si existe; si no, recorre padres)
+    function safeClosest(el, sel) {
+      if (!el) return null;
+      if (el.closest) return el.closest(sel);
+      while (el && el.nodeType === 1) {
+        if (el.matches && el.matches(sel)) return el;
+        el = el.parentElement;
+      }
+      return null;
+    }
+
+    containerEl.addEventListener("pointerdown", function (e) {
+      try {
+        var t = e.target;
+        if (!t || t.nodeType !== 1) return;               // no Element -> salir
+        if (safeClosest(t, "a, button")) return;          // si es enlace/botón, no tocar nada
+
+        var media = safeClosest(t, ".project-media");     // solo si tocamos la zona de media
+        if (!media) return;
+
+        var card = safeClosest(media, ".project-card");
+        if (!card) return;
+
+        card.classList.toggle("show-gif");
+      } catch (err) {
+        // Evita romper la página si algún navegador raro falla
+        console.error("[projects touch]", err);
+      }
+    }, { passive: true }); // no prevenimos nada, así que puede ser passive
+  })();
 });
