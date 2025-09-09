@@ -10,35 +10,196 @@ html, body {
 
 /* ===== NAVBAR ===== */
 .header {
-  background-color: #1e1e1e;
+  /* antes: background-color: #1e1e1e; */
+  background-color: rgba(30,30,30,0.66);
+  backdrop-filter: saturate(160%) blur(10px);
+  -webkit-backdrop-filter: saturate(160%) blur(10px);
   padding: 20px 40px;
   position: sticky; top: 0; z-index: 100;
   box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: box-shadow .2s ease, background-color .2s ease;
 }
-.nav { display: flex; justify-content: space-between; align-items: center; }
+.header.scrolled { box-shadow: 0 10px 24px -18px rgba(0,0,0,.8); }
+
+.nav { display: flex; justify-content: space-between; align-items: center; position: relative; }
 .logo { font-size: 1.8em; font-weight: bold; color: #ffffff; }
 .nav-links { list-style: none; display: flex; gap: 30px; }
-.nav-links a { color: #f5f5f5; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-.nav-links a:hover { color: #0037ff; }
+.nav-links a { color: #f5f5f5; text-decoration: none; font-weight: 500; transition: color 0.3s, background-color .2s; border-radius: 10px; padding: 6px 10px; }
+.nav-links a:hover { color: #ffffff; background: rgba(255,255,255,0.06); }
 
-/* ===== HERO ===== */
-.hero {
-  height: 100vh; display: flex; justify-content: center; align-items: center;
-  background: linear-gradient(135deg, #341bf6, #5d46f1, #788df6); text-align: center;
+/* --- Desactiva posibles barras antiguas del hamburguesa --- */
+.nav-toggle .bar { display: none !important; }
+
+/* Apaga cualquier hamburguesa vieja */
+.nav-toggle .bar { display: none !important; }
+
+/* Botón moderno: 3 puntos → X, con posicionamiento absoluto (sin "rayas") */
+.nav-toggle.dots{
+  display: none;                 /* se muestra sólo en móvil más abajo */
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+  cursor: pointer;
+  transition: background .3s ease, border-color .3s ease, transform .2s ease;
 }
-.hero-content h1 { font-size: 3em; margin-bottom: 10px; }
-.highlight { color: #000000; }
-.hero-content p { font-size: 1.2em; color: #ccc; }
+.nav-toggle.dots:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(0,119,255,.6);
+}
 
-/* ===== HERO v2 ===== */
+/* Cada punto: ABSOLUTE centrado; cerrados se mueven en X para verse 3 en línea */
+.nav-toggle.dots span{
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%,-50%) translateX(var(--x,0));
+  transition:
+    transform .35s cubic-bezier(.68,-0.55,.27,1.55),
+    opacity .25s,
+    width .25s,
+    height .25s,
+    border-radius .25s;
+}
+.nav-toggle.dots span:nth-child(1){ --x: -8px; }
+.nav-toggle.dots span:nth-child(2){ --x:   0px; }
+.nav-toggle.dots span:nth-child(3){ --x:  8px;  }
+
+/* ABIERTO: todos al centro; 1 y 3 se estiran y rotan para formar la X; 2 se oculta */
+.nav-toggle.dots[aria-expanded="true"] span{
+  --x: 0px;
+}
+.nav-toggle.dots[aria-expanded="true"] span:nth-child(1),
+.nav-toggle.dots[aria-expanded="true"] span:nth-child(3){
+  width: 18px; height: 2px; border-radius: 2px;
+}
+.nav-toggle.dots[aria-expanded="true"] span:nth-child(1){
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+.nav-toggle.dots[aria-expanded="true"] span:nth-child(2){
+  opacity: 0; transform: translate(-50%,-50%) scale(.7);
+}
+.nav-toggle.dots[aria-expanded="true"] span:nth-child(3){
+  transform: translate(-50%,-50%) rotate(-45deg);
+}
+
+/* Mostrar botón sólo en móvil */
+@media (max-width: 860px){
+  .nav-toggle.dots{ display: inline-flex; align-items: center; justify-content: center; }
+}
+
+/* Estado abierto: botón con fondo rojo y ligero glow */
+.nav-toggle.dots[aria-expanded="true"]{
+  background: #ff3b3b;                  /* rojo */
+  border-color: #ff3b3b;
+  box-shadow: 0 0 0 4px rgba(255,59,59,.12);
+}
+
+/* Mantén rojo también al hacer hover mientras está abierto */
+.nav-toggle.dots[aria-expanded="true"]:hover{
+  background: #ff2a2a;
+  border-color: #ff2a2a;
+}
+
+/* Las líneas/puntos en blanco para buen contraste (cerrado y abierto) */
+.nav-toggle.dots span{
+  background: #fff;
+}
+
+/* ===== HERO — elegante, discreto y moderno ===== */
+
+/* Fondo hero: azul marino muy oscuro con glow sutil */
 .hero {
-  min-height: 80vh; /* un poco menos que 100vh para pantallas pequeñas */
+  min-height: 80vh;
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #341bf6, #5d46f1, #788df6);
+  padding: 72px 20px;
+  background: linear-gradient(135deg, #0f172a, #111827 35%, #0b1220);
+  position: relative;
+  overflow: hidden;
 }
+
+/* Glow radial sutil detrás del nombre */
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  left: 50%;
+  top: -180px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+              rgba(59,130,246,0.16) 0%,
+              rgba(59,130,246,0.08) 32%,
+              transparent 70%);
+  filter: blur(70px);
+  z-index: 0;
+}
+
+
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Título + nombre con degradado sobrio (sin animación) */
+.hero-title {
+  font-size: clamp(2rem, 3vw + 1rem, 3.2rem);
+  line-height: 1.12;
+  margin-bottom: 12px;
+  color: #e5e7eb; /* gris muy claro */
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.hero-name {
+  color: #e2e8f0;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 8px rgba(59,130,246,0.35);
+  animation: glow-pulse 5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 8px rgba(59,130,246,0.35); }
+  50%      { text-shadow: 0 0 16px rgba(59,130,246,0.55); }
+}
+
+
+/* Subtítulo: tono más suave, legible */
+.hero-subtitle {
+  font-size: clamp(1rem, .7vw + 1rem, 1.15rem);
+  color: #cbd5e1;
+  opacity: .9;
+  margin-bottom: 28px;
+}
+
+/* Píldora: ajusta contraste para el nuevo fondo */
+.hero-pill {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #e2e8f0;
+}
+
+/* Ajustes responsive coherentes con el nuevo fondo */
+@media (max-width: 600px) {
+  .hero {
+    min-height: unset;
+    padding: 72px 18px 96px;
+  }
+}
+
 
 .hero-content { max-width: 900px; margin: 0 auto; }
 
@@ -63,20 +224,7 @@ html, body {
   color: #f5f5f5;
   font-weight: 700;
 }
-.hero-name {
-  display: inline-block;
-  background: linear-gradient(90deg, #fff, #a5b4fc, #60a5fa, #0037ff, #fff);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: hue-slide 8s ease infinite;
-}
-@keyframes hue-slide {
-  0% { background-position: 0% 50%; }
-  50%{ background-position: 100% 50%; }
-  100%{background-position: 0% 50%; }
-}
+
 
 /* Subtítulo (propuesta de valor) */
 .hero-subtitle {
@@ -296,11 +444,37 @@ p, li, a, button { line-height: 1.5; text-wrap: pretty; }
 /* Evita desbordes por palabras largas o URLs */
 h1, h2, h3, p, a { overflow-wrap: break-word; word-break: break-word; hyphens: auto; }
 
-/* NAV: reduce espacios en móvil */
-@media (max-width: 768px) {
+/* NAV: reduce espacios en móvil + panel desplegable */
+@media (max-width: 860px){
   .header { padding: 14px var(--pad-mobile); }
-  .nav-links { gap: 16px; flex-wrap: wrap; }
   .logo { font-size: 1.35rem; }
+
+  .nav-toggle{ 
+    display: inline-flex;        /* visible en móvil */
+    align-items: center; 
+    justify-content: center;
+  }
+
+  /* Convierte la lista en panel colapsable bajo el nav */
+  .nav-links{
+    position: absolute;
+    top: calc(100% + 6px);       /* justo debajo del nav */
+    left: 18px;
+    right: 18px;
+    background: rgba(18,18,18,.92);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    padding: 10px;
+    display: grid;
+    gap: 6px;
+    max-height: 0;               /* cerrado por defecto */
+    overflow: hidden;
+    transition: max-height .25s ease;
+  }
+  .nav-links.open{ max-height: 260px; } /* abierto */
+
+  /* separa items un poco en móvil */
+  .nav-links a{ padding: 10px 12px; }
 }
 
 /* HERO: tipografías fluidas y márgenes */
@@ -436,4 +610,61 @@ h1, h2, h3, p, a { overflow-wrap: break-word; word-break: break-word; hyphens: a
   width: 22px;
   height: 22px;
   display: block;
+}
+
+
+/* EVITAR LINEA SOBRANTE DEL MENU HAMBURGUESA*/
+
+/* Panel móvil cerrado sin borde ni padding (evita barra fantasma) */
+@media (max-width: 860px){
+  .nav-links{
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 18px; right: 18px;
+    background: rgba(18,18,18,.92);
+    border: 1px solid transparent;
+    border-radius: 14px;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform-origin: top;
+    transform: scaleY(.98);
+    pointer-events: none;
+    z-index: 200;
+    transition: max-height .25s ease, padding .2s ease, opacity .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .nav-links.open{
+    max-height: 320px;
+    padding: 10px;
+    opacity: 1;
+    transform: scaleY(1);
+    pointer-events: auto;
+    border-color: rgba(255,255,255,.08);
+  }
+}
+
+
+/* Estado de formulario */
+.form-status {
+  max-width: 500px;
+  margin: 0 auto 14px;
+  color: #cbd5e1;
+  font-size: .95rem;
+  min-height: 1.2em; /* reserva espacio para que no “salte” el layout */
+}
+
+.form-status.ok {
+  color: #10b981; /* verde suave */
+}
+
+.form-status.err {
+  color: #ef4444; /* rojo */
+}
+
+.contact-form button[disabled]{
+  opacity: .7;
+  cursor: not-allowed;
 }

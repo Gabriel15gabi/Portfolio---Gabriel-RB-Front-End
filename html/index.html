@@ -9,31 +9,37 @@
 </head>
 <body>
   <header class="header">
-    <nav class="nav">
-      <div class="logo">Gabriel Rodríguez</div>
-      <ul class="nav-links">
-        <li><a href="#about">Sobre mí</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Proyectos</a></li>
-        <li><a href="#contact">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav class="nav">
+    <div class="logo">Gabriel Rodríguez</div>
+
+    <!-- Botón hamburguesa (añádelo aquí) -->
+    <button class="nav-toggle dots" aria-expanded="false" aria-controls="primary-menu" aria-label="Abrir menú">
+  <span></span><span></span><span></span>
+    </button>
+
+    <ul id="primary-menu" class="nav-links">
+      <li><a href="#about">Sobre mí</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Proyectos</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
 
   <section class="hero">
   <div class="hero-content">
     <!-- Píldora de estado -->
     <div class="hero-pill">🎯 Disponible para prácticas · 🚀 Abierto a oportunidades junior</div>
 
-    <!-- Nombre con degradado animado -->
+<!-- TITULO -->
     <h1 class="hero-title">
-      Hola, soy <span class="hero-name">Gabriel Rodríguez Blanco</span>
-    </h1>
-
-    <!-- Rol + propuesta de valor -->
+  <span class="hero-name">Gabriel Rodríguez Blanco</span>
+</h1>
 <p class="hero-subtitle">
-  Desde que descubrí la programación, intento programarme para poder vivir de esto.
+  Desarrollador Web Junior · Front-End · HTML · CSS · JavaScript · React
 </p>
+
 
 <!-- CTAs -->
 <div class="hero-cta">
@@ -102,12 +108,28 @@
 
   <section id="contact" class="section">
     <h2>Contacto</h2>
-    <form class="contact-form">
-      <input type="text" placeholder="Tu nombre" required />
-      <input type="email" placeholder="Tu email" required />
-      <textarea placeholder="Tu mensaje" required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
+    
+<form
+  class="contact-form"
+  id="contact-form"
+  action="https://formsubmit.co/d2c59397873ce7199e906550f01ec4e2"
+  method="POST"
+  novalidate
+>
+  <input type="hidden" name="_subject" value="Nuevo mensaje desde tu portfolio" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="false" />
+  <!-- opcional: redirección tras enviar -->
+  <!-- <input type="hidden" name="_next" value="http://127.0.0.1:5500/gracias.html" /> -->
+
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+  <input type="text" name="name" id="cf-name" placeholder="Tu nombre" required />
+  <input type="email" name="email" id="cf-email" placeholder="Tu email" required />
+  <textarea name="message" id="cf-message" placeholder="Tu mensaje" required></textarea>
+  <button type="submit" id="cf-submit">Enviar</button>
+</form>
+</section>
   </section>
 
   <footer class="footer">

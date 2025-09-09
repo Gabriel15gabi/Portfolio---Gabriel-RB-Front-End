@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  /* === SKILLS INTERACTIVAS === */
+  /* === SKILLS INTERACTIVAS (TU CÓDIGO) === */
   const skills = document.querySelectorAll(".skill");
 
   skills.forEach(skill => {
@@ -43,11 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return descriptions[name] || "Próximamente...";
   }
 
-  /* === INTERRUPTOR DE LUZ PARA PROYECTOS === */
+  /* === INTERRUPTOR DE LUZ PARA PROYECTOS (TU CÓDIGO) === */
   const lightSwitch = document.getElementById("project-light");
   const projectsContainer = document.querySelector(".projects-container");
 
-  // Empieza apagado (solo si existe el contenedor)
   if (projectsContainer) projectsContainer.classList.add("off");
 
   if (lightSwitch) {
@@ -61,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* === ANIMACIONES AL HACER SCROLL === */
+  /* === ANIMACIONES AL HACER SCROLL (TU CÓDIGO) === */
   const observerOptions = { threshold: 0.1 };
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -74,9 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const animElements = document.querySelectorAll('.fade-in-element, .slide-in-element');
   animElements.forEach(el => observer.observe(el));
 
-  /* === PROYECTOS: plantilla reusable + render dinámico (logoFit por proyecto) === */
-
-  // 1) Rellena aquí tus proyectos
+  /* === PROYECTOS (TU CÓDIGO) === */
   const projectsData = [
     {
       title: "Streamio – SPA tipo Netflix",
@@ -86,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gif: "../media/imagenes/gifStreamio.gif",
       demo: "https://gabriel15gabi.github.io/Streamio/",
       code: "https://github.com/Gabriel15gabi/Streamio",
-      logoFit: "contain" // para ver el logo completo sin recorte
+      logoFit: "contain"
     },
     {
       title: "El Restaurante",
@@ -96,11 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
       gif: "../media/imagenes/gifRestaurante.gif",
       demo: "https://gabriel15gabi.github.io/El-Restaurante/",
       code: "https://github.com/Gabriel15gabi/El-Restaurante",
-      logoFit: "cover" // si tu 'logo' es más bien una captura/screenshot
+      logoFit: "cover"
     }
   ];
 
-  // 2) Iconos SVG inline
   const icons = {
     external: `
       <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -113,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>`
   };
 
-  // 3) Render de cards
   const container = document.querySelector(".projects-container");
 
   function projectCardTemplate(p) {
@@ -154,12 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderProjects(projectsData);
 
-  // --- Touch/pointer: alterna el GIF solo si tocas la media y nunca bloquea enlaces ---
+  // Touch/pointer: alterna el GIF solo si tocas la media y nunca bloquea enlaces
   (function () {
     var containerEl = document.querySelector(".projects-container");
     if (!containerEl) return;
 
-    // closest seguro (usa nativo si existe; si no, recorre padres)
     function safeClosest(el, sel) {
       if (!el) return null;
       if (el.closest) return el.closest(sel);
@@ -173,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
     containerEl.addEventListener("pointerdown", function (e) {
       try {
         var t = e.target;
-        if (!t || t.nodeType !== 1) return;               // no Element -> salir
-        if (safeClosest(t, "a, button")) return;          // si es enlace/botón, no tocar nada
+        if (!t || t.nodeType !== 1) return;
+        if (safeClosest(t, "a, button")) return;
 
-        var media = safeClosest(t, ".project-media");     // solo si tocamos la zona de media
+        var media = safeClosest(t, ".project-media");
         if (!media) return;
 
         var card = safeClosest(media, ".project-card");
@@ -184,9 +178,165 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.classList.toggle("show-gif");
       } catch (err) {
-        // Evita romper la página si algún navegador raro falla
         console.error("[projects touch]", err);
       }
-    }, { passive: true }); // no prevenimos nada, así que puede ser passive
+    }, { passive: true });
+  })();
+
+  /* === HEADER: hamburguesa + sombra al hacer scroll (NUEVO) === */
+  (function(){
+    const header = document.querySelector('.header');
+    const btn = document.querySelector('.nav-toggle');
+    const menu = document.getElementById('primary-menu');
+
+    // inicial: estado de sombra
+    const onScroll = () => header?.classList.toggle('scrolled', (window.scrollY || 0) > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // abrir/cerrar menú móvil
+    btn?.addEventListener('click', () => {
+      const open = menu?.classList.toggle('open');
+      if (open !== undefined) btn.setAttribute('aria-expanded', String(open));
+    });
+
+    // cerrar al navegar
+    menu?.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        if(menu.classList.contains('open')){
+          menu.classList.remove('open');
+          btn?.setAttribute('aria-expanded','false');
+        }
+      });
+    });
+  })();
+
+  /* === CONTACTO: validación + envío con fetch (Formspree) (NUEVO) === */
+  (function(){
+    const form = document.getElementById('contact-form');
+    if(!form) return;
+    const statusEl = document.getElementById('form-status');
+
+    function setError(input, msg){
+      const small = input.closest('label')?.querySelector('.error');
+      if(small) small.textContent = msg || "";
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    }
+
+    function validate(){
+      let ok = true;
+      [...form.elements].forEach(el=>{
+        if(!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
+        if(el.type === 'hidden' || el.name === '_gotcha') return;
+
+        let msg = "";
+        const val = el.value.trim();
+
+        if(el.hasAttribute('required') && !val) msg = "Este campo es obligatorio.";
+        if(!msg && el.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
+          msg = "Introduce un email válido.";
+        if(!msg && el.hasAttribute('minlength')){
+          const min = parseInt(el.getAttribute('minlength'),10);
+          if(val.length < min) msg = `Mínimo ${min} caracteres.`;
+        }
+
+        setError(el, msg);
+        if(msg) ok = false;
+      });
+      return ok;
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      if(statusEl) statusEl.textContent = "";
+      if(!validate()){
+        if(statusEl) statusEl.textContent = "Revisa los campos marcados.";
+        return;
+      }
+
+      const data = new FormData(form);
+      try{
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if(res.ok){
+          form.reset();
+          if(statusEl) statusEl.textContent = "¡Mensaje enviado! Te responderé pronto.";
+        }else{
+          const out = await res.json().catch(()=>({}));
+          if(statusEl) statusEl.textContent = out?.errors?.[0]?.message || "Hubo un problema al enviar. Inténtalo de nuevo.";
+        }
+      }catch(err){
+        if(statusEl) statusEl.textContent = "No se pudo enviar. ¿Tienes conexión?";
+      }
+    });
   })();
 });
+
+
+/* === CONTACT FORM: envío con fetch + validación suave === */
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const statusEl = document.getElementById('form-status');
+  const btn = document.getElementById('cf-submit');
+  const nameEl = document.getElementById('cf-name');
+  const emailEl = document.getElementById('cf-email');
+  const msgEl = document.getElementById('cf-message');
+
+  function setStatus(msg, cls) {
+    if (!statusEl) return;
+    statusEl.textContent = msg || '';
+    statusEl.classList.remove('ok', 'err');
+    if (cls) statusEl.classList.add(cls);
+  }
+
+  function validEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validación mínima
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim();
+    const message = msgEl.value.trim();
+
+    if (!name || !email || !message) {
+      setStatus('Por favor, rellena todos los campos.', 'err');
+      return;
+    }
+    if (!validEmail(email)) {
+      setStatus('Introduce un email válido.', 'err');
+      return;
+    }
+
+    // Enviando…
+    btn.disabled = true;
+    setStatus('Enviando…');
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.reset();
+        setStatus('¡Gracias! Tu mensaje se ha enviado correctamente. Te responderé pronto.', 'ok');
+      } else {
+        setStatus('No se pudo enviar el mensaje. Inténtalo de nuevo en unos minutos.', 'err');
+      }
+    } catch (err) {
+      setStatus('Hubo un problema de conexión. Revisa tu red e inténtalo otra vez.', 'err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
