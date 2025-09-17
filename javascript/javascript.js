@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* === PROYECTOS: datos y render dinámico === */
   const projectsData = [
     {
-      title: 'Streamio – SPA tipo Netflix',
+      title: 'Streamio – Clon de Netflix',
       desc: 'App SPA con catálogo, búsqueda TMDB, detalle y login simulado.',
       tech: ['HTML', 'CSS', 'JavaScript', 'TMDB API'],
       logo: '../media/imagenes/logostreamio.png',
@@ -125,13 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
       logoFit: 'cover'
     },
     {
-      title: 'Próximo Proyecto',
-      desc: 'Espacio reservado para un nuevo desarrollo.',
-      tech: ['Próximamente'],
-      logo: '../media/imagenes/placeholder.png',
-      gif: '../media/imagenes/placeholder.gif',
-      demo: '#',
-      code: '#',
+      title: 'JobTrackr',
+      desc: 'Gestor de candidaturas laborales: añade, organiza y controla tus aplicaciones en un panel intuitivo.',
+      tech: ['React', 'Vite', 'Tailwind'],
+      logo: '../media/imagenes/logojobtrackr.png',
+      gif: '../media/imagenes/gifjobtrackr.gif',
+      demo: 'https://jobtrackr-five.vercel.app',
+      code: 'https://github.com/Gabriel15gabi/jobtrackr',
       logoFit: 'contain'
     }
   ];
