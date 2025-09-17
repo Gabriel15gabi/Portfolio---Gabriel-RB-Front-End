@@ -2,137 +2,233 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gabriel RB – Desarrollador Web</title>
   <link rel="stylesheet" href="../css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
   <nav class="nav">
-    <div class="logo">Gabriel Rodríguez</div>
-
-    <!-- Botón hamburguesa (añádelo aquí) -->
-    <button class="nav-toggle dots" aria-expanded="false" aria-controls="primary-menu" aria-label="Abrir menú">
-  <span></span><span></span><span></span>
-    </button>
-
-    <ul id="primary-menu" class="nav-links">
-      <li><a href="#about">Sobre mí</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Proyectos</a></li>
-      <li><a href="#contact">Contacto</a></li>
+    <a href="#home" class="logo" aria-label="Volver al inicio">Gabriel Rodríguez</a>
+    <ul class="nav-links">
+      <li><a href="#about">SOBRE MÍ</a></li>
+      <li><a href="#skills">SKILLS</a></li>
+      <li><a href="#projects">PROYECTOS</a></li>
+      <li><a href="#contact">CONTACTO</a></li>
     </ul>
   </nav>
 </header>
 
+  <!-- Secciones a pantalla completa (scroll-snap) -->
+  <section class="hero snap-section" id="home" aria-label="Inicio">
+    <div class="hero-content">
+      <div class="hero-pill">
+        <span class="pill-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+          Disponible para prácticas
+        </span>
+        <span class="pill-sep">·</span>
+        <span class="pill-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3.5c2.5 0 6 3.5 6 6 0 3.5-7 10-8 10-1 0-4.5-3.5-4.5-3.5S5 12 5 11c0-1 6.5-8 9.5-7.5Z" fill="currentColor"/><path d="M8 14s-2-.5-3.5 1c-1.5 1.5-1 3.5-1 3.5s2 .5 3.5-1C8.5 16 8 14 8 14Z" fill="currentColor"/></svg>
+          Abierto a oportunidades junior
+        </span>
+      </div>
 
-  <section class="hero">
-  <div class="hero-content">
-    <!-- Píldora de estado -->
-    <div class="hero-pill">🎯 Disponible para prácticas · 🚀 Abierto a oportunidades junior</div>
-
-<!-- TITULO -->
-    <h1 class="hero-title">
-  <span class="hero-name">Gabriel Rodríguez Blanco</span>
-</h1>
-<p class="hero-subtitle">
-  Desarrollador Web Junior
-</p>
+      <h1 class="hero-title">
+        Hola, soy <span class="hero-name">Gabriel Rodríguez Blanco</span>
+      </h1>
 
 
-<!-- CTAs -->
-<div class="hero-cta">
-  <a href="#projects" class="btn">Ver proyectos</a>
-  <a href="#contact" class="btn btn-outline">Contactar</a>
-  <!-- OJO: index.html está en /html → hay que usar ../media/... -->
-  <a href="../media/CV_Gabriel_Rodriguez_Blanco_Enhanced.pdf"
-     class="btn btn-ghost"
-     download
-     aria-label="Descargar CV en PDF">
-     Descargar CV
-  </a>
-</div>
 
-<!-- Social links -->
-<div class="hero-social">
-  <a href="https://github.com/Gabriel15gabi" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.2c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.35-1.76-1.35-1.76-1.1-.75.08-.73.08-.73 1.22.09 1.86 1.26 1.86 1.26 1.08 1.86 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.51.12-3.16 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.86.12 3.16.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.47 5.93.43.38.82 1.11.82 2.24v3.32c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
-  </a>
-  <a href="https://www.linkedin.com/in/gabriel-rodr%C3%ADguez-blanco-72776a252/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.7H9.35V9h3.4v1.56h.05c.47-.9 1.62-1.86 3.34-1.86 3.57 0 4.23 2.35 4.23 5.4v6.35zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
-  </a>
-</div>
-    <!-- Mini stats (opcionales) -->
-    <ul class="hero-stats" aria-label="Datos rápidos">
-      <li><strong>2+</strong> proyectos completos</li>
-      <li><strong>HTML-CSS-JAVASCRIPT-REACT</strong> experiencia</li>
-      <li><strong>Extremadura</strong> · ESP</li>
-    </ul>
+      <div class="hero-cta">
+        <a href="#projects" class="btn">Ver proyectos</a>
+        <a href="#contact" class="btn btn-outline">Contactar</a>
+        <a href="../media/CV_Gabriel_Rodriguez_Blanco_Enhanced.pdf" class="btn btn-ghost" target="_blank" rel="noopener">Descargar CV</a>
+      </div>
+
+      <div class="hero-social">
+        <a href="https://github.com/Gabriel15gabi" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.2c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.35-1.76-1.35-1.76-1.1-.75.08-.73.08-.73 1.22.09 1.86 1.26 1.86 1.26 1.08 1.86 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.51.12-3.16 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.86.12 3.16.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.47 5.93.43.38.82 1.11.82 2.24v3.32c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/gabriel-rodr%C3%ADguez-blanco-72776a252/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.7H9.35V9h3.4v1.56h.05c.47-.9 1.62-1.86 3.34-1.86 3.57 0 4.23 2.35 4.23 5.4v6.35zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
+        </a>
+      </div>
+
+      <ul class="hero-stats" aria-label="Datos rápidos">
+        <li><strong>2+</strong> proyectos</li>
+        <li class="sep">|</li>
+        <li><strong>HTML · CSS · JS · React</strong></li>
+        <li class="sep">|</li>
+        <li><strong>EXTREMADURA</strong> · ESP</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="about" class="section snap-section about">
+  <div class="container about-grid">
+    <!-- Fondo “código” decorativo -->
+    <div class="about-code-bg" aria-hidden="true"></div>
+
+    <div class="about-left">
+      <h2>SOBRE MÍ</h2>
+      <p class="about-text">
+        Soy desarrollador Front-End junior. Me gustan las interfaces limpias, accesibles y rápidas.
+        He creado un clon de Netflix llamado <em>Streamio</em> y una web de restaurante con una carta y un sistema de reservas fisticio.
+        <br> 
+        Busco <strong>prácticas</strong> y mi primer puesto junior para crecer con React y aportar desde el primer día.
+      </p>
+
+      <!-- Datos rápidos (sin emojis + ubicación) -->
+      <ul class="about-facts" aria-label="Datos rápidos">
+        <li>Mérida 06800 · Extremadura</li>
+        <li>Front-End & SPA</li>
+        <li>Accesibilidad y UX</li>
+      </ul>
+
+      <!-- Estado actual -->
+      <div class="about-now">
+        <strong>Ahora mismo:</strong>
+        mejorando React y buenas prácticas; abierto a oportunidades en remoto/híbrido.
+      </div>
+
+      <!-- Métricas con contador (2 ítems) -->
+      <div class="about-metrics">
+        <div class="metric">
+          <span class="metric-number" data-target="2">0</span>
+          <span class="metric-label">Proyectos</span>
+        </div>
+        <div class="metric">
+          <span class="metric-number" data-target="4">0</span>
+          <span class="metric-label">Tecnologías clave</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <!-- Mini timeline -->
+      <h3 class="about-subtitle">Ruta reciente</h3>
+      <ol class="about-timeline">
+        <li><span>2024</span> Empecé formación Front-End (Tokio School)</li>
+        <li><span>2025</span> Terminé dos proyectos (SPA y Restaurante)</li>
+        <li><span>Ahora</span> Buscando prácticas y primer rol junior</li>
+      </ol>
+    </div>
   </div>
 </section>
 
 
-  <section id="about" class="section">
-    <h2>Sobre mí</h2>
-    <p>Soy desarrollador web junior apasionado por crear aplicaciones modernas y usables. Actualmente buscando prácticas y abierto a mi primer empleo como Front-End Developer. Me gusta trabajar con HTML, CSS, JavaScript y empezar a crecer con React.</p>
-  </section>
+  <section id="skills" class="section snap-section">
+  <div class="container">
+    <h2>SKILLS</h2>
+    <p class="skills-intro">
+      Tecnologías con las que trabajo a diario. Estoy reforzando React y mejores prácticas de arquitectura Front-End.
+    </p>
 
-  <section id="skills" class="section">
-    <h2>Skills</h2>
-    <div class="skills-container">
-      <div class="skill" data-name="html">HTML</div>
-      <div class="skill" data-name="css">CSS</div>
-      <div class="skill" data-name="javascript">JavaScript</div>
-      <div class="skill" data-name="react">React</div>
-      <div class="skill" data-name="git">Git</div>
-    </div>
-    <div id="skill-info" class="skill-info"></div>
-  </section>
+    <div class="skills-grid">
+  <button class="skill" data-name="html" aria-label="HTML">
+    <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="">
+    <span>HTML5</span>
+  </button>
 
-  <section id="projects" class="section">
-    <h2>Proyectos</h2>
+  <button class="skill" data-name="css" aria-label="CSS">
+    <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="">
+    <span>CSS3</span>
+  </button>
 
-    <!-- Interruptor luz -->
-    <div class="light-switch">
-      <label class="switch">
-        <input type="checkbox" id="project-light">
-        <span class="slider"></span>
-      </label>
-      <span class="switch-label">Encender la luz</span>
-    </div>
+  <button class="skill" data-name="javascript" aria-label="JavaScript">
+    <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="">
+    <span>JavaScript</span>
+  </button>
 
-    <!-- El JS insertará aquí las cards -->
-    <div class="projects-container"></div>
-  </section>
+  <button class="skill" data-name="react" aria-label="React">
+    <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="">
+    <span>React</span>
+  </button>
 
-  <section id="contact" class="section">
-    <h2>Contacto</h2>
-    
-<form
-  class="contact-form"
-  id="contact-form"
-  action="https://formsubmit.co/d2c59397873ce7199e906550f01ec4e2"
-  method="POST"
-  novalidate
->
-  <input type="hidden" name="_subject" value="Nuevo mensaje desde tu portfolio" />
-  <input type="hidden" name="_template" value="table" />
-  <input type="hidden" name="_captcha" value="false" />
-  <!-- opcional: redirección tras enviar -->
-  <!-- <input type="hidden" name="_next" value="http://127.0.0.1:5500/gracias.html" /> -->
+  <button class="skill" data-name="github" aria-label="GitHub">
+  <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="">
+  <span>GitHub</span>
+</button>
+</div>
+<div id="skill-info" class="skill-info"></div>
 
-  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-
-  <input type="text" name="name" id="cf-name" placeholder="Tu nombre" required />
-  <input type="email" name="email" id="cf-email" placeholder="Tu email" required />
-  <textarea name="message" id="cf-message" placeholder="Tu mensaje" required></textarea>
-  <button type="submit" id="cf-submit">Enviar</button>
-</form>
+  </div>
 </section>
+
+
+  <section id="projects" class="section snap-section">
+    <div class="container">
+      <h2>PROYECTOS</h2>
+      <div class="projects-container"></div>
+    </div>
   </section>
 
-  <footer class="footer">
+  <section id="contact" class="section snap-section">
+  <div class="container contact">
+    <div class="contact-left">
+      <h2>CONTACTO</h2>
+      <p class="contact-desc">
+        ¿Hablamos? Suelo responder rápido. Podemos empezar por email o LinkedIn.
+      </p>
+
+      <div class="contact-cards">
+        <article class="contact-card">
+          <div class="cc-icon" aria-hidden="true">
+            <!-- sobre -->
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>
+          </div>
+          <div class="cc-body">
+            <h3>Email</h3>
+            <p><span id="email-text">gabriel_gabiz@hotmail.com</span></p>
+            <div class="cc-actions">
+              <button class="btn btn-outline copy-btn" data-copy="#email-text">Copiar</button>
+              <a class="btn" id="mailto-btn" href="#">Abrir email</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <div class="cc-icon" aria-hidden="true">
+            <!-- link -->
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M10.6 13.4a1 1 0 0 1 0-1.4l2-2a1 1 0 1 1 1.4 1.4l-2 2a1 1 0 0 1-1.4 0ZM9 17a4 4 0 0 1 0-8h2a1 1 0 0 1 0 2H9a2 2 0 0 0 0 4h2a1 1 0 1 1 0 2H9Zm6-2a1 1 0 0 1 0-2h2a2 2 0 0 0 0-4h-2a1 1 0 0 1 0-2h2a4 4 0 0 1 0 8h-2Z"/></svg>
+          </div>
+          <div class="cc-body">
+            <h3>Perfiles</h3>
+            <div class="cc-links">
+              <a href="https://github.com/Gabriel15gabi" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://www.linkedin.com/in/gabriel-rodr%C3%ADguez-blanco-72776a252/" target="_blank" rel="noopener">LinkedIn</a>
+              <a href="../media/CV_Gabriel_Rodriguez_Blanco_Enhanced.pdf" target="_blank" rel="noopener">CV</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <form class="contact-form" id="contact-form">
+        <div class="form-row">
+          <input type="text" id="name" placeholder="Tu nombre" required />
+          <input type="email" id="email" placeholder="Tu email" required />
+        </div>
+        <input type="text" id="subject" placeholder="Asunto (opcional)" />
+        <textarea id="message" placeholder="Tu mensaje (máx. 600 caracteres)" maxlength="600" required></textarea>
+        <div class="form-meta">
+          <span id="char-counter">0/600</span>
+          <span class="response-note">Suelo responder en el mismo día</span>
+        </div>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toasts -->
+  <div id="toast-wrap" class="toast-wrap" aria-live="polite" aria-atomic="true"></div>
+</section>
+
+
+  <footer class="footer snap-section">
     <p>&copy; 2025 Gabriel Rodríguez Blanco. Todos los derechos reservados.</p>
   </footer>
 
