@@ -256,7 +256,6 @@ body { padding-top: var(--header-h); }
   margin-inline:auto;
 }
 
-
 /* ===== PROJECTS ===== */
 /* 3 columnas ≥ 48rem; 1 en móvil */
 .projects-container {
@@ -379,3 +378,18 @@ a:focus, button:focus, .skill:focus, .project-card:focus-within { outline: .15em
 
 /* ===== Responsive base ===== */
 @media (max-width: 40rem){ .nav-links{ display:none; } }
+
+/* ===== FIXES ESPECÍFICOS PARA MÓVIL ===== */
+@media (max-width: 48rem){
+  /* Evitar “saltos/cortes” en móvil por scroll-snap obligatorio */
+  body{ scroll-snap-type: none; }
+  .section{ min-height: auto; }
+}
+
+/* Por si alguna imagen/gif quisiera desbordar */
+.project-media img,
+.project-media video{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

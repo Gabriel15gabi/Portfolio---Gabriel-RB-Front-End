@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* === SKILLS interactivas + barra con nivel === */
   const skills = document.querySelectorAll('.skill');
 
-
-
   skills.forEach(skill => {
     skill.addEventListener('click', () => {
       if (skill.classList.contains('active')) {
@@ -45,16 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function getSkillDescription(name) {
-  const descriptions = {
-    html: 'Estructura semántica, formularios accesibles, SEO técnico básico.',
-    css: 'Flexbox, Grid, variables CSS, animaciones y responsive.',
-    javascript: 'ES6+, fetch, DOM, modales, validación, SPA ligera.',
-    react: 'Componentes, props/estado, SPA y JSX (en progreso).',
-    github: 'Repos, issues, PRs, GitHub Pages, workflows básicos.'
-  };
-  return descriptions[name] || 'Próximamente...';
-}
-
+    const descriptions = {
+      html: 'Estructura semántica, formularios accesibles, SEO técnico básico.',
+      css: 'Flexbox, Grid, variables CSS, animaciones y responsive.',
+      javascript: 'ES6+, fetch, DOM, modales, validación, SPA ligera.',
+      react: 'Componentes, props/estado, SPA y JSX (en progreso).',
+      github: 'Repos, issues, PRs, GitHub Pages, workflows básicos.'
+    };
+    return descriptions[name] || 'Próximamente...';
+  }
 
   /* === Animaciones al hacer scroll (opcional) === */
   const observerOptions = { threshold: 0.1 };
@@ -110,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tech: ['HTML', 'CSS', 'JavaScript', 'TMDB API'],
       logo: '../media/imagenes/logostreamio.png',
       gif: '../media/imagenes/gifStreamio.gif',
-      demo: 'https://tu-demo-streamio.com',
+      demo: 'https://Gabriel15gabi.github.io/Streamio/',     // <-- pon aquí tu URL real (https://…)
       code: 'https://github.com/tuusuario/streamio',
       logoFit: 'contain'
     },
@@ -120,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tech: ['HTML', 'CSS', 'JavaScript'],
       logo: '../media/imagenes/logo1.png',
       gif: '../media/imagenes/gifRestaurante.gif',
-      demo: 'https://tu-demo-proyecto2.com',
+      demo: 'https://Gabriel15gabi.github.io/El-Restaurante/',     // <-- pon aquí tu URL real (https://…)
       code: 'https://github.com/tuusuario/proyecto2',
       logoFit: 'cover'
     },
@@ -153,6 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function projectCardTemplate(p) {
     const techChips = p.tech.map(t => `<li>${t}</li>`).join('');
     const logoFitClass = p.logoFit === 'contain' ? 'fit-contain' : 'fit-cover';
+
+    // Normaliza enlaces: si no empieza por http/https, anteponemos https://
+    const demoUrl = /^https?:\/\//i.test(p.demo) ? p.demo : `https://${p.demo}`;
+    const codeUrl = /^https?:\/\//i.test(p.code) ? p.code : `https://${p.code}`;
+
     return `
       <article class="project-card" tabindex="0">
         <div class="project-media">
@@ -163,10 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>${p.desc}</p>
         <ul class="project-tags" aria-label="Tecnologías empleadas">${techChips}</ul>
         <div class="project-actions">
-          <a class="btn" href="${p.demo}" target="_blank" rel="noopener noreferrer">
+          <a class="btn" href="${demoUrl}" target="_blank" rel="noopener noreferrer">
             ${icons.external} Ver demo
           </a>
-          <a class="btn btn-outline" href="${p.code}" target="_blank" rel="noopener noreferrer">
+          <a class="btn btn-outline" href="${codeUrl}" target="_blank" rel="noopener noreferrer">
             ${icons.github} Ver código
           </a>
         </div>
@@ -180,13 +182,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderProjects(projectsData);
 
-  // Soporte touch (mostrar gif con tap en móvil)
+  // Soporte touch SIN bloquear enlaces ni scroll
   container?.addEventListener('touchstart', (e) => {
-    const card = e.target.closest('.project-card');
-    if (!card) return;
-    e.preventDefault();
+    // Si tocas un enlace, deja que se abra
+    if (e.target.closest('a')) return;
+
+    // Solo togglamos GIF si el toque fue en la zona de media
+    const media = e.target.closest('.project-media');
+    const card  = e.target.closest('.project-card');
+    if (!media || !card) return;
+
     card.classList.toggle('show-gif');
-  }, { passive: false });
+  }, { passive: true });
 });
 
 /* === CONTACTO: copiar, contador y mailto === */
