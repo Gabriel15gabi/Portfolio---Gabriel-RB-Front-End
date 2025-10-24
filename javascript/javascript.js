@@ -182,6 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderProjects(projectsData);
 
+
+  // === Actualiza contador de proyectos ===
+  const projectCountEl = document.getElementById('project-count');
+  if (projectCountEl) {
+    projectCountEl.textContent = `(${projectsData.length})`;
+  }
+
   // Soporte touch SIN bloquear enlaces ni scroll
   container?.addEventListener('touchstart', (e) => {
     // Si tocas un enlace, deja que se abra
